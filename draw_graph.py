@@ -9,7 +9,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 def drawGraph(confusion_matrix, labels):
-    filename = "history.csv"
+    filename = "Saved_Models/training_history.csv"
     history = pd.read_csv(filename, header=0, low_memory=False)
     history_array = history.values
     epochs = history_array[:, 0]
@@ -39,7 +39,7 @@ def drawGraph(confusion_matrix, labels):
     fig = go.Figure(data=data, layout=layout)
     fig['layout']['xaxis'].update(title="Number of Epochs", range = [min(epochs), max(epochs)], dtick=len(epochs)/10, showline = True, zeroline=True,  mirror='ticks', linecolor='#636363', linewidth=2)
     fig['layout']['yaxis'].update(title="Accuracy", range = [0, 1], dtick=0.1, showline = True, zeroline=True, mirror='ticks',linecolor='#636363',linewidth=2)
-    py.image.save_as(fig, filename="Accuracy_Graph.png")
+    py.image.save_as(fig, filename="Graphs/Accuracy_Graph.png")
 
     print "Accuracy Graph Created"
 
@@ -62,7 +62,7 @@ def drawGraph(confusion_matrix, labels):
     fig = go.Figure(data=data, layout=layout)
     fig['layout']['xaxis'].update(title="Number of Epochs", range = [min(epochs), max(epochs)], dtick=len(epochs)/10, showline = True, zeroline=True,  mirror='ticks', linecolor='#636363', linewidth=2)
     fig['layout']['yaxis'].update(title="Loss", dtick=0.1, showline = True, zeroline=True, mirror='ticks',linecolor='#636363',linewidth=2)
-    py.image.save_as(fig, filename="Loss_Graph.png")
+    py.image.save_as(fig, filename="Graphs/Loss_Graph.png")
     print "Loss Graph Created"
 
     trace = go.Heatmap(z=confusion_matrix, x=labels, y=labels, reversescale=False, colorscale='Viridis')
@@ -73,6 +73,6 @@ def drawGraph(confusion_matrix, labels):
     xaxis = dict(dtick=1),
     yaxis = dict(dtick=1))
     fig = go.Figure(data=data, layout=layout)
-    py.image.save_as(fig, filename="Confusion_Matrix.png")
+    py.image.save_as(fig, filename="Graphs/Confusion_Matrix.png")
     print "Confusion Matrix Created"
     return

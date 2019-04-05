@@ -17,7 +17,7 @@ test_images = test_images / 255.
 test_labels = np_utils.to_categorical(test_labels)
 n_classes = test_labels.shape[1]
 
-loaded_model = load_model("Model.h5")
+loaded_model = load_model("Saved_Models/Model.h5")
 loaded_model.set_weights(loaded_model.get_weights())
 
 print loaded_model.summary()
@@ -42,7 +42,7 @@ predicted = [np.argmax(predictions[i]) for i in sample_indices]
 print sample_labels
 print predicted
 print confusion_matrix
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure(figsize=(12, 10))
 for i in range(len(sample_images)):
     truth = sample_labels[i]
     prediction = predicted[i]
@@ -52,6 +52,6 @@ for i in range(len(sample_images)):
     plt.text(40, 10, "Truth:        {0}\nPrediction: {1}".format(truth, prediction),
              fontsize=12, color=color)
     plt.imshow(sample_images[i])
-
+plt.savefig("Output/MNIST.png")
 plt.show()
 drawGraph(confusion_matrix, labels)
